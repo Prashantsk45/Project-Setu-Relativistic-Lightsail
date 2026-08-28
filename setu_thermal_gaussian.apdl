@@ -1,0 +1,85 @@
+Created At: 2026-08-27T20:23:25+05:30
+Completed At: 2026-08-27T20:23:26+05:30
+File Path: `file:///D:/CFD/Project%20Setu/setu_thermal_gaussian.apdl`
+Total Lines: 77
+Total Bytes: 1314
+Showing lines 1 to 77
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+FINISH
+/CLEAR,NOSTART
+/TITLE,Project Setu: Gaussian Laser Thermal Gradient FEA
+/PREP7
+
+! Element: SHELL131 (Thermal Shell)
+ET,1,SHELL131
+KEYOPT,1,1,1
+
+! Material: Silicon Nitride (Si3N4)
+MP,KXX,1,30.0
+MP,DENS,1,3100
+MP,C,1,700
+MP,EMIS,1,0.95
+
+! Shell Thickness: 10 microns
+SECTYPE,1,SHELL
+SECDATA,10.0E-6,1,0,3
+
+! Geometry: 4.0m diameter circle
+CYL4,0,0,2.0
+
+! Mesh
+ESIZE,0.08
+AMESH,ALL
+
+/SOLU
+ANTYPE,0
+
+! 1. Concentric Radial Gaussian Laser Heat Flux (Raw Pre-computed Numbers)
+CSYS,1
+
+! Zone 1: Center Core (r = 0.0 to 0.4m)
+ESEL,S,CENT,X,0.0,0.4
+BFE,ALL,HGEN,,1.58E10
+
+! Zone 2: Inner Ring (r = 0.4 to 0.8m)
+ESEL,S,CENT,X,0.4,0.8
+BFE,ALL,HGEN,,1.15E10
+
+! Zone 3: Middle Ring (r = 0.8 to 1.2m)
+ESEL,S,CENT,X,0.8,1.2
+BFE,ALL,HGEN,,6.49E9
+
+! Zone 4: Outer Ring (r = 1.2 to 1.6m)
+ESEL,S,CENT,X,1.2,1.6
+BFE,ALL,HGEN,,2.78E9
+
+! Zone 5: Rim Edge (r = 1.6 to 2.0m)
+ESEL,S,CENT,X,1.6,2.05
+BFE,ALL,HGEN,,8.94E8
+
+ALLSEL,ALL
+CSYS,0
+
+! 2. Space radiation to 2.7 K on top and bottom faces (h = 85.84 W/m^2.K)
+SFE,ALL,1,CONV,,85.84
+SFE,ALL,1,CONV,2,2.7
+SFE,ALL,2,CONV,,85.84
+SFE,ALL,2,CONV,2,2.7
+
+! 3. Outer carbon-fiber perimeter rim heat sink (conductive cooling to structure at 200 K)
+CSYS,1
+NSEL,S,LOC,X,1.92,2.08
+D,ALL,TEMP,200.0
+ALLSEL,ALL
+CSYS,0
+
+SOLVE
+FINISH
+
+/POST1
+SET,LAST
+/VIEW,1,1,1,1
+/PLOPTS,LEG1,1
+PLNSOL,TEMP
+
+The above content shows the entire, complete file contents of the requested file.

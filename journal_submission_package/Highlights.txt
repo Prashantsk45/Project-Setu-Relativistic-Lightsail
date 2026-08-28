@@ -1,0 +1,7 @@
+Research Highlights (Max 85 characters each):
+
+1. 3D multi-physics model couples 100 GW optics, FEA mechanics, and radiation heat.
+2. ASME GCI of 0.13% and p=1.95 confirm rigorous numerical grid independence.
+3. Membrane stress of 530.88 MPa maintains a 3.77x safety factor in Si3N4 substrate.
+4. Thermal equilibrium holds core at 923.02 K with a +1247 K margin below sublimation.
+5. Photon thrust model matches JAXA IKAROS flight telemetry within 0.12% error.

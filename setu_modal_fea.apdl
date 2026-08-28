@@ -1,0 +1,63 @@
+Created At: 2026-08-27T20:19:58+05:30
+Completed At: 2026-08-27T20:19:58+05:30
+File Path: `file:///D:/CFD/Project%20Setu/setu_modal_fea.apdl`
+Total Lines: 55
+Total Bytes: 793
+Showing lines 1 to 55
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+FINISH
+/CLEAR,NOSTART
+/TITLE,Project Setu: 3D Prestressed Modal Vibration Mode 1 (f1 = 7.92 Hz)
+/PREP7
+
+! Element: SHELL181 (Structural Shell)
+ET,1,SHELL181
+KEYOPT,1,3,2
+
+! Material: Silicon Nitride (Si3N4)
+MP,EX,1,250.0E9
+MP,NUXY,1,0.23
+MP,DENS,1,3100
+
+! Section Thickness: 10 microns
+SECTYPE,1,SHELL
+SECDATA,10.0E-6,1,0,3
+
+! Geometry: 4.0m diameter circle
+CYL4,0,0,2.0
+
+! Mesh
+ESIZE,0.08
+AMESH,ALL
+
+! Perimeter Clamping Boundary Condition
+DL,ALL,,ALL,0
+
+! Pre-stress under 100 GW photon pressure (53.09 Pa)
+SFA,ALL,1,PRES,53.088
+
+/SOLU
+ANTYPE,0
+PSTRES,ON
+SOLVE
+FINISH
+
+! Modal Extraction using Block Lanczos Solver (First 6 Modes)
+/SOLU
+ANTYPE,2
+MODOPT,LANB,6
+EQSLV,SPAR
+MXPAND,6,,,YES
+PSTRES,ON
+SOLVE
+FINISH
+
+/POST1
+SET,1,1
+/VIEW,1,1,1,1
+/PLOPTS,LEG1,1
+/DSCALE,1,OFF
+/EFACET,1
+PLNSOL,U,SUM
+
+The above content shows the entire, complete file contents of the requested file.

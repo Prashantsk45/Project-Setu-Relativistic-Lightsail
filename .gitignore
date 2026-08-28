@@ -1,0 +1,10 @@
+# Gitignore
+*.log
+*.trn
+*.gz
+*.bat
+*.bak
+*.tmp
+cleanup-fluent-*
+*.pyc
+__pycache__/

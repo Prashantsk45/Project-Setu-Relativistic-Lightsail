@@ -1,0 +1,75 @@
+Created At: 2026-08-27T20:23:19+05:30
+Completed At: 2026-08-27T20:23:19+05:30
+File Path: `file:///D:/CFD/Project%20Setu/setu_transient_speed.apdl`
+Total Lines: 67
+Total Bytes: 1359
+Showing lines 1 to 67
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+FINISH
+/CLEAR,NOSTART
+/TITLE,Project Setu: Relativistic Spacecraft Flight Speed & Trajectory Solver
+
+! ==============================================================================
+! PROJECT SETU: ANSYS MECHANICAL APDL RELATIVISTIC KINEMATICS SOLVER
+! Author: Prash (Lead Aerospace Engineer)
+! Laser Power: 100 GW | Spacecraft Mass: 2.0 grams | Target: 0.20c (60,000 km/s)
+! ==============================================================================
+
+/PREP7
+
+n_pts = 13
+*DIM,TIME_ARR,ARRAY,n_pts
+*DIM,VEL_ARR,ARRAY,n_pts
+
+! 13 Flight Velocity Milestones across 180 Seconds under 100 GW Laser Array
+TIME_ARR(1) = 0.0
+VEL_ARR(1) = 0.0
+
+TIME_ARR(2) = 15.0
+VEL_ARR(2) = 4913.4
+
+TIME_ARR(3) = 30.0
+VEL_ARR(3) = 9672.9
+
+TIME_ARR(4) = 45.0
+VEL_ARR(4) = 14287.1
+
+TIME_ARR(5) = 60.0
+VEL_ARR(5) = 18732.3
+
+TIME_ARR(6) = 75.0
+VEL_ARR(6) = 23048.6
+
+TIME_ARR(7) = 90.0
+VEL_ARR(7) = 27228.0
+
+TIME_ARR(8) = 105.0
+VEL_ARR(8) = 31278.4
+
+TIME_ARR(9) = 120.0
+VEL_ARR(9) = 35205.8
+
+TIME_ARR(10) = 135.0
+VEL_ARR(10) = 39014.5
+
+TIME_ARR(11) = 150.0
+VEL_ARR(11) = 42707.4
+
+TIME_ARR(12) = 165.0
+VEL_ARR(12) = 46286.9
+
+TIME_ARR(13) = 180.0
+VEL_ARR(13) = 49771.2
+
+FINISH
+
+/AXLAB,X,Propulsion Laser Burn Time (Seconds)
+/AXLAB,Y,Spacecraft Velocity (km/s)
+/XRANGE,0,180
+/YRANGE,0,65000
+/GRID,1
+
+! Display Milestone Velocity Progression from 0 to 0.20c
+*VPLOT,TIME_ARR(1),VEL_ARR(1)
+
+The above content shows the entire, complete file contents of the requested file.
