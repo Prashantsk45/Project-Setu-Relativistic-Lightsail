@@ -1,6 +1,7 @@
 # Project Setu: 3D Multi-Physics Design and Spaceflight-Validated Framework for a 0.20c Relativistic Lightsail
 
 [![arXiv](https://img.shields.io/badge/arXiv-2609.06156-b31b1b.svg)](https://arxiv.org/abs/2609.06156)
+[![DOI: 10.6084/m9.figshare.33476263](https://img.shields.io/badge/DOI-10.6084%2Fm9.figshare.33476263-blue.svg)](https://doi.org/10.6084/m9.figshare.33476263)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status: Submitted / Under Review](https://img.shields.io/badge/Status-Under%20Review-success.svg)]()
 [![Solvers: ANSYS APDL | Lumerical FDTD](https://img.shields.io/badge/Solvers-ANSYS%20APDL%20%7C%20Lumerical%20FDTD-orange.svg)]()
@@ -238,7 +239,7 @@ ansys252 -b -i code/setu_thermal_gaussian.apdl -o thermal.out
 
 ## 8. Citation
 
-If you build upon this work, use the simulation scripts, or reference the numerical models, please cite the preprint:
+If you build upon this work, use the simulation scripts, or reference the numerical models, please cite the preprint and software archive:
 
 ```bibtex
 @article{kamble2026projectsetu,
@@ -248,6 +249,17 @@ If you build upon this work, use the simulation scripts, or reference the numeri
   year      = {2026},
   doi       = {10.48550/arXiv.2609.06156},
   url       = {https://arxiv.org/abs/2609.06156}
+}
+
+@software{kamble2026figshare,
+  author    = {Kamble, Prashant Suresh},
+  title     = {Project Setu: 3D Multi-Physics Design and Spaceflight-Validated Framework for a 0.20c Relativistic Lightsail},
+  month     = sep,
+  year      = {2026},
+  publisher = {Figshare},
+  version   = {1.0},
+  doi       = {10.6084/m9.figshare.33476263},
+  url       = {https://doi.org/10.6084/m9.figshare.33476263}
 }
 ```
 
