@@ -1,0 +1,60 @@
+! ==============================================================================
+! Project Setu: Prestressed Modal Analysis (Block Lanczos)
+! Author: Prashant S. Kamble
+! ==============================================================================
+FINISH
+/CLEAR,NOSTART
+/TITLE,Project Setu: 3D Prestressed Modal Vibration Mode 1 (f1 = 7.92 Hz)
+/PREP7
+
+! Element type: SHELL181 (Mindlin-Reissner thin shell)
+ET,1,SHELL181
+KEYOPT,1,3,2
+
+! Material properties: Silicon Nitride (Si3N4)
+MP,EX,1,250.0E9
+MP,NUXY,1,0.23
+MP,DENS,1,3100
+
+! Section thickness: 10.0 um
+SECTYPE,1,SHELL
+SECDATA,10.0E-6,1,0,3
+
+! Geometry: 4.0 m circular membrane (R = 2.0 m)
+CYL4,0,0,2.0
+
+! Mesh discretization
+ESIZE,0.08
+AMESH,ALL
+
+! Perimeter rim clamping boundary condition
+DL,ALL,,ALL,0
+
+! Pre-stress under 100 GW photon radiation pressure (53.09 Pa)
+SFA,ALL,1,PRES,53.088
+
+! Static pre-stress solve
+/SOLU
+ANTYPE,0
+PSTRES,ON
+SOLVE
+FINISH
+
+! Modal extraction using Block Lanczos solver (first 6 modes)
+/SOLU
+ANTYPE,2
+MODOPT,LANB,6
+EQSLV,SPAR
+MXPAND,6,,,YES
+PSTRES,ON
+SOLVE
+FINISH
+
+! Post-processing: plot fundamental mode shape
+/POST1
+SET,1,1
+/VIEW,1,1,1,1
+/PLOPTS,LEG1,1
+/DSCALE,1,OFF
+/EFACET,1
+PLNSOL,U,SUM

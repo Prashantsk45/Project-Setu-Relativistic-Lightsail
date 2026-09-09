@@ -1,10 +1,42 @@
-# Gitignore
-*.log
-*.trn
-*.gz
-*.bat
-*.bak
-*.tmp
-cleanup-fluent-*
-*.pyc
+﻿# Ignore legacy root script duplicates (scripts are cleanly structured in code/)
+/*.py
+/*.apdl
+/*.lsf
+/*.fsp
+/*.bat
+
+# Ignore legacy duplicate / large documents and drafts
+/*.docx
+/*.zip
+/Project_Setu_*.pdf
+
+# Ignore working and archive directories
+ansys_run/
+bin/
+pdf_pages/
+regen_figures/
+sources/
+journal_submission_package/
 __pycache__/
+
+# Solver scratch and temporary files
+*.rst
+*.mode
+*.full
+*.emat
+*.esav
+*.rdb
+*.rth
+*.db
+*.out
+*.err
+*.DSP
+*.ldhi
+*.mlv
+*.mntr
+*.stat
+*.r001
+cleanup-*
+*.log
+*.tmp
+*.bak

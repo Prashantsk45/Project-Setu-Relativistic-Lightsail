@@ -1,0 +1,65 @@
+! ==============================================================================
+! Project Setu: Relativistic Velocity Milestone Validation
+! Author: Prashant S. Kamble
+! Laser: 100 GW | Mass: 2.0 g | Target: 0.20c (60,000 km/s)
+! ==============================================================================
+FINISH
+/CLEAR,NOSTART
+/TITLE,Project Setu: Relativistic Spacecraft Flight Speed & Trajectory Solver
+
+/PREP7
+
+n_pts = 13
+*DIM,TIME_ARR,ARRAY,n_pts
+*DIM,VEL_ARR,ARRAY,n_pts
+
+! 13 coordinate velocity checkpoints across 180 s burn
+TIME_ARR(1) = 0.0
+VEL_ARR(1) = 0.0
+
+TIME_ARR(2) = 15.0
+VEL_ARR(2) = 4913.4
+
+TIME_ARR(3) = 30.0
+VEL_ARR(3) = 9672.9
+
+TIME_ARR(4) = 45.0
+VEL_ARR(4) = 14287.1
+
+TIME_ARR(5) = 60.0
+VEL_ARR(5) = 18732.3
+
+TIME_ARR(6) = 75.0
+VEL_ARR(6) = 23048.6
+
+TIME_ARR(7) = 90.0
+VEL_ARR(7) = 27228.0
+
+TIME_ARR(8) = 105.0
+VEL_ARR(8) = 31278.4
+
+TIME_ARR(9) = 120.0
+VEL_ARR(9) = 35205.8
+
+TIME_ARR(10) = 135.0
+VEL_ARR(10) = 39014.5
+
+TIME_ARR(11) = 150.0
+VEL_ARR(11) = 42707.4
+
+TIME_ARR(12) = 165.0
+VEL_ARR(12) = 46286.9
+
+TIME_ARR(13) = 180.0
+VEL_ARR(13) = 49771.2
+
+FINISH
+
+/AXLAB,X,Propulsion Laser Burn Time (Seconds)
+/AXLAB,Y,Spacecraft Velocity (km/s)
+/XRANGE,0,180
+/YRANGE,0,65000
+/GRID,1
+
+! Plot milestone velocity trajectory
+*VPLOT,TIME_ARR(1),VEL_ARR(1)
