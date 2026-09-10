@@ -189,12 +189,12 @@ Initial Launch Radiation Thrust & $F_0$ & 666.40 & N \\
 Uniform Transverse Radiation Pressure & $p_{\mathrm{avg}}$ & 53.09 & Pa \\
 \colrule
 \multicolumn{4}{l}{\textit{Target Relativistic Flight Mission Envelope}} \\
-Lightsail Outer Diameter & $D$ & 4.00 & m \\
-Central Payload Hub Radius & $r_{\mathrm{hub}}$ & 0.10 & m \\
+Lightsail Outer Diameter & $D$ & 4.00 & $\mathrm{m}$ \\
+Central Payload Hub Radius & $r_{\mathrm{hub}}$ & 0.10 & $\mathrm{m}$ \\
 Active Reflective Area & $A_{\mathrm{sail}}$ & 12.57 & $\mathrm{m}^2$ \\
-Target Instrumentation Payload Mass & $m_{\mathrm{payload}}$ & 1.50 & g \\
-Ultra-Thin Flight Membrane Mass & $m_{\mathrm{sail}}$ & 0.50 & g \\
-Target Total Flight Vehicle Mass & $m_{\mathrm{total}}$ & 2.00 & g \\
+Target Instrumentation Payload Mass & $m_{\mathrm{payload}}$ & 1.50 & $\mathrm{g}$ \\
+Ultra-Thin Flight Membrane Mass & $m_{\mathrm{sail}}$ & 0.50 & $\mathrm{g}$ \\
+Target Total Flight Vehicle Mass & $m_{\mathrm{total}}$ & 2.00 & $\mathrm{g}$ \\
 Effective Flight Areal Mass & $\sigma_{\mathrm{eff}}$ & $\le 0.16$ & $\mathrm{g/m}^2$ \\
 Velocity at $t=180\,\mathrm{s}$ / $t=227.1\,\mathrm{s}$ & $v_{\mathrm{rel}}$ & $0.166c$ / $0.20c$ & --- \\
 \colrule
@@ -375,32 +375,6 @@ This stress-stiffening mechanism elevates the fundamental natural frequency of t
 \label{fig:fig11}
 \end{figure}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.62\textwidth,keepaspectratio]{Figure_12_Telemetry_Cross_Validation.pdf}
-\caption{Empirical cross-validation of radiation pressure propulsion against in-flight telemetry from JAXA IKAROS and NASA LightSail 2 missions.}
-\label{fig:fig12}
-\end{figure*}
-
-\begin{table*}[t]
-\caption{Master Multi-Physics Simulation and Flight Telemetry Validation Matrix.}
-\label{tab:table3}
-\begin{ruledtabular}
-\renewcommand{\arraystretch}{0.90}
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{llccc}
-Validation Domain & Benchmark Source & Benchmark Value & Project Setu Model & Deviation / Status \\
-\colrule
-Spaceflight Telemetry & JAXA IKAROS (1.0 AU) & $1,120.0\,\mu\mathrm{N}$ & $1,121.3\,\mu\mathrm{N}$ & $0.12\%$ [Passed] \\
-Spaceflight Telemetry & NASA LightSail 2 (LEO) & $285.0\,\mu\mathrm{N}$ & $278.9\,\mu\mathrm{N}$ & $2.13\%$ [Passed] \\
-Thermal Mechanics & Analytical Theory & 927.05 K & 923.02 K (ANSYS) & $0.44\%$ [Passed] \\
-Material Thermal Limit & $\mathrm{Si}_3\mathrm{N}_4$ Sublimation & 2,170.0 K & 923.02 K (Peak) & $+1,247$ K [Safe] \\
-Structural Safety & $\mathrm{Si}_3\mathrm{N}_4$ Tensile Yield & 2,000.0 MPa & 530.88 MPa (Peak) & $3.77\times$ [Safe Margin] \\
-Dynamic Vibration & Laser Jitter Limit & $< 1.00$ Hz & 7.92 Hz (Mode 1) & $7.92\times$ [Decoupled] \\
-\end{tabular}
-\end{ruledtabular}
-\end{table*}
-
 \subsection{Numerical Dimension Scaling and Mass Reconciliation}
 To satisfy the relativistic kinematics integrated across the propulsion burn (Section~\ref{sec:theory}A), the target flight configuration of the spacecraft assumes a total vehicle mass of $m=2.0$\,g (comprising a 1.5\,g instrumentation payload and a 0.5\,g reflective membrane). Under a 100\,GW ground laser array ($F_0=666.40$\,N), this yields an initial coordinate acceleration of approximately $333,200\,\mathrm{m/s}^2$ ($34,000\,g$), reaching $0.166c$ in 180 seconds and the $0.20c$ interstellar target velocity at 227.1 seconds.
 
@@ -411,13 +385,39 @@ To reconcile these physical regimes, our finite element framework treats the mac
 Second, while conventional quarter-wave dielectric stacks physically require micron-scale thickness to achieve constructive interference at 1064\,nm (producing an areal mass of $\sim 39\,\mathrm{g/m}^2$), achieving the sub-gram relativistic flight envelope will require single-layer high-contrast gratings (HCG) or 2D nanoresonators. For ultra-thin membranes approaching this lower areal mass regime where frequency scales as $f \propto t^{-0.5}$, the simulated 7.92\,Hz fundamental frequency for the 10\,$\mu\mathrm{m}$ scaled prototype analytically shifts to approximately 245\,Hz for an equivalent 13.5\,nm flight membrane. Under sustained photon thrust, radiation stress-stiffening continues to dominate out-of-plane rigidity, elevating drumhead natural frequencies well above ground-based adaptive optics pointing jitter (1.0\,Hz) and completely decoupling the macroscopic sail from beam-steering flutter.
 
 \subsection{Spaceflight Telemetry Cross-Validation}
-Fig.~\ref{fig:fig12} presents empirical cross-validation of Project Setu's photon radiation thrust formulation against flight telemetry from JAXA's IKAROS and NASA's LightSail 2 missions. Table~\ref{tab:table3} compiles the master multi-physics validation matrix.
+Fig.~\ref{fig:fig12} presents empirical cross-validation of Project Setu's photon radiation thrust formulation against flight telemetry from JAXA's IKAROS and NASA's LightSail 2 missions. Table~\ref{tab:table4} compiles the master multi-physics validation matrix.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\textwidth,keepaspectratio]{Figure_12_Telemetry_Cross_Validation.pdf}
+\caption{Empirical cross-validation of radiation pressure propulsion against in-flight telemetry from JAXA IKAROS and NASA LightSail 2 missions.}
+\label{fig:fig12}
+\end{figure*}
+
+\begin{table*}[t]
+\caption{Master Multi-Physics Simulation and Flight Telemetry Validation Matrix.}
+\label{tab:table4}
+\begin{ruledtabular}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llccc@{}}
+Validation Domain & Benchmark Source & Benchmark Value & Project Setu Model & Deviation / Status \\
+\colrule
+Spaceflight Telemetry & JAXA IKAROS ($1.0\,\mathrm{AU}$) & $1,120.0\,\mu\mathrm{N}$ & $1,121.3\,\mu\mathrm{N}$ & $+0.12\%\ \text{[Passed]}$ \\
+Spaceflight Telemetry & NASA LightSail 2 (LEO) & $285.0\,\mu\mathrm{N}$ & $278.9\,\mu\mathrm{N}$ & $-2.13\%\ \text{[Passed]}$ \\
+Thermal Mechanics & Analytical Theory & $927.05\,\mathrm{K}$ & $923.02\,\mathrm{K}\ \text{(ANSYS)}$ & $0.44\%\ \text{[Passed]}$ \\
+Material Thermal Limit & $\mathrm{Si}_3\mathrm{N}_4$ Sublimation & $2,170.0\,\mathrm{K}$ & $923.02\,\mathrm{K}\ \text{(Peak)}$ & $+1,247\,\mathrm{K}\ \text{[Safe]}$ \\
+Structural Safety & $\mathrm{Si}_3\mathrm{N}_4$ Tensile Yield & $2,000.0\,\mathrm{MPa}$ & $530.88\,\mathrm{MPa}\ \text{(Peak)}$ & $3.77\times\ \text{[Safe Margin]}$ \\
+Dynamic Vibration & Laser Jitter Limit & $< 1.00\,\mathrm{Hz}$ & $7.92\,\mathrm{Hz}\ \text{(Mode 1)}$ & $7.92\times\ \text{[Decoupled]}$ \\
+\end{tabular*}
+\end{ruledtabular}
+\end{table*}
 
 The computational thrust formulation tracks spaceflight measurements with high precision. For IKAROS at 1.0\,AU, the model predicts 1,121.3\,$\mu\mathrm{N}$ versus flight telemetry of 1,120.0\,$\mu\mathrm{N}$ ($0.12\%$ error). For LightSail 2 in LEO, it predicts 278.9\,$\mu\mathrm{N}$ against measured apogee-raising thrust of 285.0\,$\mu\mathrm{N}$ ($2.13\%$ deviation). This alignment confirms that momentum conservation models are rigorously verified across solar and beamed propulsion regimes.
 
 \subsection{Tabletop Laboratory Optical and Thermal Qualification Protocol}
 To experimentally qualify the metasurface prior to full-scale deployment, a tabletop high-vacuum protocol is established using a 1\,$\mathrm{cm}^2$ coupon in a vacuum chamber ($10^{-5}\,\mathrm{Torr}$). Utilizing a 100\,W continuous-wave fiber laser ($\lambda_0=1064\,\mathrm{nm}$) focused to a 4.13\,mm spot diameter, the coupon achieves an elevated surface temperature of $923\,\mathrm{K}$ ($650\,^\circ\mathrm{C}$). This enables direct spectrophotometric confirmation of the 99.78\% reflectance stopband, empirical measurement of dual-sided emissivity ($\varepsilon \approx 0.95$), and validation that absorption remains bounded below 10\,ppm under high flux without material degradation.
 
+\newpage
 \section{Conclusion}
 \label{sec:conclusion}
 This paper presents a comprehensive 3D multi-physics investigation and validation suite for Project Setu, a 4.0\,m relativistic lightsail propelled by a 100\,GW ground laser array. The key findings are summarized as follows:
@@ -446,9 +446,9 @@ All custom Python 3.11 numerical solvers, ANSYS Mechanical APDL scripts, and Ans
 
 \begingroup
 \sloppy
-\fontsize{6.6pt}{7.6pt}\selectfont
+\fontsize{9.0pt}{11.4pt}\selectfont
 \begin{thebibliography}{30}
-\setlength{\itemsep}{-3.4pt plus 0.2pt}
+\setlength{\itemsep}{3.5pt plus 0.5pt}
 \setlength{\parskip}{0pt}
 
 \bibitem{ref1} R.~L.~Forward, \textit{Roundtrip interstellar travel using laser-pushed lightsails}, J. Spacecr. Rockets \textbf{21}, 187 (1984), \href{https://doi.org/10.2514/3.8632}{doi:\allowbreak 10.2514/\allowbreak 3.8632}.
