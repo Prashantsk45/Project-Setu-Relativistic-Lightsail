@@ -1,4 +1,4 @@
-# Project Setu: 3D Multi-Physics Design and Spaceflight-Validated Framework for a 0.20c Relativistic Lightsail
+# Project Setu: 3D Multi-Physics Design and Scaled Structural Analysis for a Relativistic Lightsail Architecture
 
 [![arXiv](https://img.shields.io/badge/arXiv-2609.06156-b31b1b.svg)](https://arxiv.org/abs/2609.06156)
 [![DOI: 10.6084/m9.figshare.33476263](https://img.shields.io/badge/DOI-10.6084%2Fm9.figshare.33476263-blue.svg)](https://doi.org/10.6084/m9.figshare.33476263)
@@ -243,7 +243,7 @@ If you build upon this work, use the simulation scripts, or reference the numeri
 
 ```bibtex
 @article{kamble2026projectsetu,
-  title     = {Project Setu: 3D Multi-Physics Design and Spaceflight-Validated Framework for a 0.20c Relativistic Lightsail},
+  title     = {Project Setu: 3D Multi-Physics Design and Scaled Structural Analysis for a Relativistic Lightsail Architecture},
   author    = {Kamble, Prashant Suresh},
   journal   = {arXiv preprint arXiv:2609.06156},
   year      = {2026},
@@ -253,7 +253,7 @@ If you build upon this work, use the simulation scripts, or reference the numeri
 
 @software{kamble2026figshare,
   author    = {Kamble, Prashant Suresh},
-  title     = {Project Setu: 3D Multi-Physics Design and Spaceflight-Validated Framework for a 0.20c Relativistic Lightsail},
+  title     = {Project Setu: 3D Multi-Physics Design and Scaled Structural Analysis for a Relativistic Lightsail Architecture},
   month     = sep,
   year      = {2026},
   publisher = {Figshare},

@@ -17,7 +17,7 @@
 
 \begin{document}
 
-\title{Project Setu: 3D Multi-Physics Design and Spaceflight-Validated Framework for a \texorpdfstring{$\bm{0.20c}$}{0.20c} Relativistic Lightsail}
+\title{Project Setu: 3D Multi-Physics Design and Scaled Structural Analysis for a Relativistic Lightsail Architecture}
 
 \author{Prashant Suresh Kamble\,\orcid{0009-0005-4228-3795}}
 \email{prashantsk.272@gmail.com}
@@ -26,7 +26,7 @@
 \date{\today}
 
 \begin{abstract}
-Deep-space exploration beyond the solar system requires eliminating chemical propellant mass penalties to achieve relativistic flight velocities ($0.166c$ at 180\,s, reaching the mission target of $0.20c$ at 227\,s). This study presents a 3D multi-physics numerical framework for a 4.0-meter circular lightsail propelled by a $100\text{ GW}$ ground laser array, coupling 3D Maxwell FDTD wave optics, non-linear membrane mechanics, and Stefan-Boltzmann thermal radiation in ANSYS Mechanical APDL and Ansys Lumerical. A four-level grid convergence study establishes numerical independence with an ASME $\mathrm{GCI}_{21}$ of $0.13\%$, resolving peak membrane stresses of $530.88\text{ MPa}$ with a $3.77\times$ safety factor against stoichiometric $\mathrm{Si}_3\mathrm{N}_4$ tensile failure. With optical absorption constrained to $10\,\mathrm{ppm}$ ($\mathcal{A}=1.0\times 10^{-5}$), the steady-state core temperature stabilizes at $923.02\text{ K}$ ($0.44\%$ deviation from radiation theory), maintaining a $+1,247\text{ K}$ margin below sublimation, while fundamental drumhead modal resonance ($7.92\text{ Hz}$) provides a $7.92\times$ safety buffer against laser jitter. The photon thrust formulation matches in-flight telemetry from JAXA IKAROS and NASA LightSail 2 within $0.12\%$ and $2.13\%$, verifying momentum transfer consistency across both solar and beamed propulsion regimes.
+Deep-space exploration beyond the solar system requires eliminating chemical propellant mass penalties to achieve relativistic flight velocities ($0.166c$ at 180\,s, reaching the mission target of $0.20c$ at 227\,s). This study presents a 3D multi-physics numerical framework for a 4.0-meter circular lightsail propelled by a $100\text{ GW}$ ground laser array, coupling 3D Maxwell FDTD wave optics, non-linear membrane mechanics, and Stefan-Boltzmann thermal radiation in ANSYS Mechanical APDL and Ansys Lumerical. A four-level grid convergence study establishes numerical independence with an ASME $\mathrm{GCI}_{21}$ of $0.13\%$, resolving peak membrane stresses of $530.88\text{ MPa}$ with a $3.77\times$ safety factor against stoichiometric $\mathrm{Si}_3\mathrm{N}_4$ tensile failure. With optical absorption constrained to $10\,\mathrm{ppm}$ ($\mathcal{A}=1.0\times 10^{-5}$), the steady-state core temperature stabilizes at $923.02\text{ K}$ ($0.44\%$ deviation from radiation theory), maintaining a $+1,247\text{ K}$ margin below sublimation, while fundamental drumhead modal resonance ($7.92\text{ Hz}$) provides a $7.92\times$ safety buffer against laser jitter. The electrodynamic radiation pressure formulation is cross-verified against published flight telemetry from JAXA IKAROS and NASA LightSail 2 within $0.12\%$ and $2.13\%$, confirming classical momentum transfer modeling across solar and beamed propulsion regimes.
 \end{abstract}
 
 \maketitle
@@ -221,7 +221,9 @@ Substrate Tensile Yield Strength & $\sigma_{\mathrm{yield}}$ & 2,000.0 & MPa \\
 \subsection{Finite Element Setup and Boundary Conditions}
 We built the 4.0\,m circular sail in ANSYS Mechanical APDL 2025 R2 as an axisymmetric thin-shell surface. A central cutout with radius $r_{\mathrm{hub}}=0.10$\,m ($r_{\mathrm{hub}}/R=0.05$) accommodates the scientific instrument package, as mapped in Fig.~\ref{fig:fig2}.
 
-We discretized the structural domain using 4-node quadrilateral SHELL181 elements based on Mindlin-Reissner kinematics, enabling large-deflection geometric non-linearity (\texttt{NLGEOM, ON}) to track membrane tensioning. In-plane thermal conduction and steady-state temperature distributions are resolved using 4-node thermal shell elements (SHELL131). The structural mesh enforces full Dirichlet clamping constraints along the outer perimeter circumference ($r=2.00$\,m), setting all translational and rotational degrees of freedom to zero ($UX=UY=UZ=\mathrm{ROTX}=\mathrm{ROTY}=\mathrm{ROTZ}=0$) in the spacecraft co-moving quasi-static reference frame (d'Alembert frame). This represents the structural constraint from an ultralight deployable perimeter tensioning hoop balancing transverse photon pressure against vehicle inertia, while accommodating the central payload instrument hub ($r_{\mathrm{hub}}=0.10$\,m). A uniform transverse radiation pressure load $p_{\mathrm{avg}}=53.09$\,Pa is applied normal to the active sail surface ($A_{\mathrm{sail}}=12.566\,\mathrm{m}^2$). Prestressed modal eigensolutions are evaluated using the Block Lanczos algorithm with stress stiffening enabled (\texttt{PSTRES, ON}) to extract resonant frequencies and drumhead mode shapes under continuous photon thrust. Fig.~\ref{fig:fig3} illustrates the baseline finite element mesh comprising 3,048 SHELL181 elements with localized radial refinement at the boundary.
+We discretized the structural domain using 4-node quadrilateral SHELL181 elements based on Mindlin-Reissner kinematics, enabling large-deflection geometric non-linearity (\texttt{NLGEOM, ON}) to track membrane tensioning. In-plane thermal conduction and steady-state temperature distributions are resolved using 4-node thermal shell elements (SHELL131). The structural mesh enforces full Dirichlet clamping constraints along the outer perimeter circumference ($r=2.00$\,m), setting all translational and rotational degrees of freedom to zero ($UX=UY=UZ=\mathrm{ROTX}=\mathrm{ROTY}=\mathrm{ROTZ}=0$) in the spacecraft co-moving quasi-static reference frame (d'Alembert frame). The fixed perimeter clamping condition models an idealized rigid deployable ring fixture, representative of either a ground-based vacuum test apparatus or a hoop-tensioned deployable mast system. In unconstrained free flight, equivalent membrane tension would be maintained either via spin-stabilization (centrifugal tip masses, as demonstrated by IKAROS) or optomechanical shell curvature.
+
+Directly simulating an ultra-thin nanoresonator ($t \sim 15\,\mathrm{nm}$, $\sigma_{\mathrm{eff}} \le 0.16\,\mathrm{g/m}^2$) across a 4.0\,m macroscopic span introduces severe numerical ill-conditioning and singular stiffness matrices in classical Mindlin-Reissner shell formulations. Therefore, the structural FEA evaluates a scaled $13.49\,\mu\mathrm{m}$ prototype under identical macroscopic edge tension per unit length ($T_{\mathrm{edge}} = 53.09\,\mathrm{N/m}$), establishing an engineering stress benchmark while nanophotonic thin-film scaling is addressed analytically. A uniform transverse radiation pressure load $p_{\mathrm{avg}}=53.09$\,Pa is applied normal to the active sail surface ($A_{\mathrm{sail}}=12.566\,\mathrm{m}^2$). Prestressed modal eigensolutions are evaluated using the Block Lanczos algorithm with stress stiffening enabled (\texttt{PSTRES, ON}) to extract resonant frequencies and drumhead mode shapes under continuous photon thrust. Fig.~\ref{fig:fig3} illustrates the baseline finite element mesh comprising 3,048 SHELL181 elements with localized radial refinement at the boundary.
 
 
 
@@ -287,12 +289,12 @@ The trajectory profile clearly exhibits the characteristic curvature of relativi
 \label{fig:fig5}
 \end{figure}
 
-A logarithmic mission timeline comparing Project Setu against conventional chemical systems is illustrated in Fig.~\ref{fig:fig6}. Whereas chemical systems require months to reach Mars and over 75,000 years to reach Proxima Centauri ($4.24\,\mathrm{ly}$), Project Setu compresses deep-space transit by four orders of magnitude under 100\,GW beamed irradiance: Earth-Moon in 16.0\,s, Mars flyby in 1.0\,hour, Pluto in 27.0\,hours, and heliopause crossing ($120\,\mathrm{AU}$) in 5.2\,days. Most significantly, interstellar cruise to Alpha Centauri is reduced to 21.2\,years, demonstrating unprecedented operational reach for relativistic science missions.
+A logarithmic mission timeline comparing Project Setu against conventional chemical systems is illustrated in Fig.~\ref{fig:fig6}. Whereas chemical systems require months to reach Mars and over 75,000 years to reach Proxima Centauri ($4.24\,\mathrm{ly}$), Project Setu compresses deep-space transit by four orders of magnitude under 100\,GW beamed irradiance: Earth-Moon in 48.0\,s, Mars flyby in 1.0\,hour, Pluto in 27.0\,hours, and heliopause crossing ($120\,\mathrm{AU}$) in 5.2\,days. Most significantly, interstellar cruise to Alpha Centauri is reduced to 21.2\,years, demonstrating unprecedented operational reach for relativistic science missions.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.90\textwidth,keepaspectratio]{Figure_06_Interplanetary_Transit_Comparison.pdf}
-\caption{Solar System and interstellar transit time comparison (logarithmic scale) between chemical rockets and Project Setu relativistic lightsail.}
+\caption{Solar System and interstellar transit time comparison (logarithmic scale) between chemical rockets and the Project Setu target flight mission envelope ($0.20c$ beamed propulsion, $m=2.0\,\mathrm{g}$).}
 \label{fig:fig6}
 \end{figure*}
 
@@ -312,6 +314,25 @@ As the lightsail accelerates toward $0.20c$, the perceived laser wavelength in t
 Fig.~\ref{fig:fig8} illustrates the analytical Stefan-Boltzmann radiative thermal equilibrium curve for the 4.0\,m diameter lightsail as a function of incident laser beam power ranging from 10\,GW to 200\,GW. Operating in deep-space vacuum, the sail balances absorbed optical energy ($P_{\mathrm{abs}}=\mathcal{A} \cdot P_{\mathrm{laser}}=1.00\,\mathrm{MW}$ at 100\,GW for optical absorption bounded at $\mathcal{A}=1.0\times 10^{-5}$, while the remaining $0.217\%$ of non-reflected light is transmitted through the dielectric stack) exclusively through dual-sided blackbody radiation into the 3.0\,K cosmic microwave background. The resulting equilibrium temperature follows the quartic relation $T_{\mathrm{eq}} \propto (\mathcal{A} P_{\mathrm{laser}})^{1/4}$, scaling smoothly from 619.6\,K at 20\,GW to 1,102.4\,K at 200\,GW.
 
 At the nominal 100.0\,GW baseline with dual-sided thermal emissivity $\varepsilon=0.95$, the analytical equilibrium core temperature stabilizes at $T_{\mathrm{eq}}=927.05\,\mathrm{K}$ ($653.90\,^\circ\mathrm{C}$). This operational steady-state preserves a massive $+1,247\,\mathrm{K}$ thermal safety buffer below the stoichiometric silicon nitride sublimation breakdown threshold ($T_{\mathrm{sub}}=2,170.0\,\mathrm{K}$ / $1,896.9\,^\circ\mathrm{C}$, where $T_{\mathrm{sub}}-T_{\mathrm{FEA}}=2,170.0\,\mathrm{K}-923.02\,\mathrm{K}=+1,246.98\,\mathrm{K}\approx +1,247\,\mathrm{K}$). Having such a wide operating clearance protects the membrane against thermal runaway, vaporization, or structural softening during high-flux exposure.
+
+\begin{table}[t]
+\caption{Optical Absorptance Sensitivity and Thermal Stability Thresholds under $100\,\mathrm{GW}$ Irradiance ($T_{\mathrm{sub}}=2,170\,\mathrm{K}$).}
+\label{tab:thermal_sensitivity}
+\begin{ruledtabular}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lccc}
+Absorptance $\mathcal{A}$ & $P_{\mathrm{abs}}$ & $T_{\mathrm{eq}}$ & Margin to $T_{\mathrm{sub}}$ \\
+\colrule
+$10\,\mathrm{ppm}$ (Nominal) & $1.00\,\mathrm{MW}$ & $927.1\,\mathrm{K}$ & $+1,243\,\mathrm{K}$ [Safe] \\
+$50\,\mathrm{ppm}$ & $5.00\,\mathrm{MW}$ & $1,386.3\,\mathrm{K}$ & $+784\,\mathrm{K}$ [Safe] \\
+$100\,\mathrm{ppm}$ & $10.0\,\mathrm{MW}$ & $1,648.6\,\mathrm{K}$ & $+521\,\mathrm{K}$ [Safe] \\
+$200\,\mathrm{ppm}$ & $20.0\,\mathrm{MW}$ & $1,960.5\,\mathrm{K}$ & $+210\,\mathrm{K}$ [Marginal] \\
+$500\,\mathrm{ppm}$ & $50.0\,\mathrm{MW}$ & $2,465.1\,\mathrm{K}$ & Runaway ($>T_{\mathrm{sub}}$) \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Sensitivity analysis across realistic fabrication defect densities (Table~\ref{tab:thermal_sensitivity}) confirms that the lightsail preserves positive thermal operating margins up to an absorptance threshold of approximately $\mathcal{A} \approx 200\,\mathrm{ppm}$. Exceeding $300\,\mathrm{ppm}$ under $100\,\mathrm{GW}$ irradiance drives core temperatures past the $2,170\,\mathrm{K}$ stoichiometric $\mathrm{Si}_3\mathrm{N}_4$ sublimation limit, underscoring the necessity of strict sub-wavelength defect control during metasurface deposition.
 
 \begin{figure}[!b]
 \centering
@@ -354,25 +375,9 @@ This stress-stiffening mechanism elevates the fundamental natural frequency of t
 \label{fig:fig11}
 \end{figure}
 
-\subsection{Numerical Dimension Scaling and Mass Reconciliation}
-To satisfy the relativistic kinematics integrated across the propulsion burn (Section~\ref{sec:theory}A), the target flight configuration of the spacecraft assumes a total vehicle mass of $m=2.0$\,g (comprising a 1.5\,g instrumentation payload and a 0.5\,g reflective membrane). Under a 100\,GW ground laser array ($F_0=666.40$\,N), this yields an initial coordinate acceleration of approximately $333,200\,\mathrm{m/s}^2$ ($34,000\,g$), reaching $0.166c$ in 180 seconds and the $0.20c$ interstellar target velocity at 227.1 seconds.
-
-However, a physical lightsail of $D=4.0$\,m fabricated with the baseline 10.0\,$\mu\mathrm{m}$ substrate thickness (13.49\,$\mu\mathrm{m}$ total stack) yields an actual sail mass of 492.5\,g. Accelerating a 494.5\,g total spacecraft mass under 666.40\,N of thrust would constrain the initial acceleration to $1,348\,\mathrm{m/s}^2$ ($137\,g$), requiring a 14-year continuous laser burn to reach relativistic velocities.
-
-To reconcile these physical regimes, our finite element framework treats the macroscopic 13.49\,$\mu\mathrm{m}$ configuration as a Scaled Structural Qualification Prototype. First, for a circular membrane of radius $R = 2.00\,\mathrm{m}$ loaded under uniform transverse radiation pressure $p_{\mathrm{avg}} = 53.09\,\mathrm{Pa}$, the static equilibrium edge tension per unit length is $T_{\mathrm{edge}} = p_{\mathrm{avg}} R / 2 = 53.09 \times 2.00 / 2 = 53.09\,\mathrm{N/m}$. Because this edge tension per unit length is independent of thickness, the macroscopic boundary loads and membrane tensioning mechanics are structurally identical between both regimes. The reported peak FEA Von Mises stress of 530.88\,MPa represents a scaled baseline evaluated at an equivalent thickness of 10\,$\mu\mathrm{m}$ to avoid numerical singular matrices and ill-conditioned shell stiffness formulations under 100\,GW flux.
-
-\newpage
-
-Second, while conventional quarter-wave dielectric stacks physically require micron-scale thickness to achieve constructive interference at 1064\,nm (producing an areal mass of $\sim 39\,\mathrm{g/m}^2$), achieving the sub-gram relativistic flight envelope will require single-layer high-contrast gratings (HCG) or 2D nanoresonators. For ultra-thin membranes approaching this lower areal mass regime where frequency scales as $f \propto t^{-0.5}$, the simulated 7.92\,Hz fundamental frequency for the 10\,$\mu\mathrm{m}$ scaled prototype analytically shifts to approximately 245\,Hz for an equivalent 13.5\,nm flight membrane. Under sustained photon thrust, radiation stress-stiffening continues to dominate out-of-plane rigidity, elevating drumhead natural frequencies well above ground-based adaptive optics pointing jitter (1.0\,Hz) and completely decoupling the macroscopic sail from beam-steering flutter.
-
-\subsection{Spaceflight Telemetry Cross-Validation}
-Fig.~\ref{fig:fig12} presents the empirical cross-validation of Project Setu's photon radiation thrust formulation against physical flight telemetry recorded during JAXA's IKAROS mission in interplanetary space and NASA's LightSail 2 mission in low Earth orbit. Table~\ref{tab:table3} compiles the complete master multi-physics validation matrix.
-
-The computational thrust formulation tracks spaceflight measurements with exceptional precision. For the IKAROS interplanetary probe at 1.0\,AU, the model predicts a photon thrust of 1,121.3\,$\mu\mathrm{N}$ against the flight-telemetry value of 1,120.0\,$\mu\mathrm{N}$, yielding a fractional error of just $0.12\%$. For the LightSail 2 mission in low Earth orbit, the model predicts 278.9\,$\mu\mathrm{N}$ against measured orbital apogee-raising thrust of 285.0\,$\mu\mathrm{N}$ ($2.13\%$ deviation). This close alignment with real spaceflight telemetry confirms that the underlying electrodynamic and momentum equations are fully validated across both solar and multi-gigawatt laser propulsion regimes.
-
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.85\textwidth,keepaspectratio]{Figure_12_Telemetry_Cross_Validation.pdf}
+\includegraphics[width=0.62\textwidth,keepaspectratio]{Figure_12_Telemetry_Cross_Validation.pdf}
 \caption{Empirical cross-validation of radiation pressure propulsion against in-flight telemetry from JAXA IKAROS and NASA LightSail 2 missions.}
 \label{fig:fig12}
 \end{figure*}
@@ -396,46 +401,54 @@ Dynamic Vibration & Laser Jitter Limit & $< 1.00$ Hz & 7.92 Hz (Mode 1) & $7.92\
 \end{ruledtabular}
 \end{table*}
 
-\subsection{Tabletop Laboratory Optical and Thermal Qualification Protocol}
-To experimentally qualify the dielectric metasurface prior to full-scale space deployment, a tabletop high-vacuum testing protocol is established using a 1\,$\mathrm{cm}^2$ coupon in a high-vacuum chamber ($10^{-5}\,\mathrm{Torr}$). By utilizing a 100\,W continuous-wave single-mode fiber laser ($\lambda_0=1064\,\mathrm{nm}$) focused to a 4.13\,mm spot diameter, the coupon achieves an elevated surface temperature of $\approx 650\,^\circ\mathrm{C}$ ($923\,\mathrm{K}$). This setup enables direct spectrophotometric verification of the 99.78\% reflectance stopband, empirical measurement of the dual-sided thermal emissivity ($\varepsilon \approx 0.95$), and experimental validation that optical absorption remains suppressed below 10\,ppm under high thermal flux without material degradation. This provides an immediate, low-cost ground qualification path before committing to multi-gigawatt full-scale array operations.
+\subsection{Numerical Dimension Scaling and Mass Reconciliation}
+To satisfy the relativistic kinematics integrated across the propulsion burn (Section~\ref{sec:theory}A), the target flight configuration of the spacecraft assumes a total vehicle mass of $m=2.0$\,g (comprising a 1.5\,g instrumentation payload and a 0.5\,g reflective membrane). Under a 100\,GW ground laser array ($F_0=666.40$\,N), this yields an initial coordinate acceleration of approximately $333,200\,\mathrm{m/s}^2$ ($34,000\,g$), reaching $0.166c$ in 180 seconds and the $0.20c$ interstellar target velocity at 227.1 seconds.
 
-\newpage
+However, a physical lightsail of $D=4.0$\,m fabricated with the baseline 10.0\,$\mu\mathrm{m}$ substrate thickness (13.49\,$\mu\mathrm{m}$ total stack) yields an actual sail mass of 492.5\,g. Accelerating a 494.5\,g total spacecraft mass under 666.40\,N of thrust would constrain the initial acceleration to $1,348\,\mathrm{m/s}^2$ ($137\,g$), requiring a 14-year continuous laser burn to reach relativistic velocities.
+
+To reconcile these physical regimes, our finite element framework treats the macroscopic 13.49\,$\mu\mathrm{m}$ configuration as a Scaled Structural Qualification Prototype. First, for a circular membrane of radius $R = 2.00\,\mathrm{m}$ loaded under uniform transverse radiation pressure $p_{\mathrm{avg}} = 53.09\,\mathrm{Pa}$, the static equilibrium edge tension per unit length is $T_{\mathrm{edge}} = p_{\mathrm{avg}} R / 2 = 53.09 \times 2.00 / 2 = 53.09\,\mathrm{N/m}$. Because this edge tension per unit length is independent of thickness, the macroscopic boundary loads and membrane tensioning mechanics are structurally identical between both regimes. The reported peak FEA Von Mises stress of 530.88\,MPa represents a scaled baseline evaluated at an equivalent thickness of 10\,$\mu\mathrm{m}$ to avoid numerical singular matrices and ill-conditioned shell stiffness formulations under 100\,GW flux.
+
+Second, while conventional quarter-wave dielectric stacks physically require micron-scale thickness to achieve constructive interference at 1064\,nm (producing an areal mass of $\sim 39\,\mathrm{g/m}^2$), achieving the sub-gram relativistic flight envelope will require single-layer high-contrast gratings (HCG) or 2D nanoresonators. For ultra-thin membranes approaching this lower areal mass regime where frequency scales as $f \propto t^{-0.5}$, the simulated 7.92\,Hz fundamental frequency for the 10\,$\mu\mathrm{m}$ scaled prototype analytically shifts to approximately 245\,Hz for an equivalent 13.5\,nm flight membrane. Under sustained photon thrust, radiation stress-stiffening continues to dominate out-of-plane rigidity, elevating drumhead natural frequencies well above ground-based adaptive optics pointing jitter (1.0\,Hz) and completely decoupling the macroscopic sail from beam-steering flutter.
+
+\subsection{Spaceflight Telemetry Cross-Validation}
+Fig.~\ref{fig:fig12} presents empirical cross-validation of Project Setu's photon radiation thrust formulation against flight telemetry from JAXA's IKAROS and NASA's LightSail 2 missions. Table~\ref{tab:table3} compiles the master multi-physics validation matrix.
+
+The computational thrust formulation tracks spaceflight measurements with high precision. For IKAROS at 1.0\,AU, the model predicts 1,121.3\,$\mu\mathrm{N}$ versus flight telemetry of 1,120.0\,$\mu\mathrm{N}$ ($0.12\%$ error). For LightSail 2 in LEO, it predicts 278.9\,$\mu\mathrm{N}$ against measured apogee-raising thrust of 285.0\,$\mu\mathrm{N}$ ($2.13\%$ deviation). This alignment confirms that momentum conservation models are rigorously verified across solar and beamed propulsion regimes.
+
+\subsection{Tabletop Laboratory Optical and Thermal Qualification Protocol}
+To experimentally qualify the metasurface prior to full-scale deployment, a tabletop high-vacuum protocol is established using a 1\,$\mathrm{cm}^2$ coupon in a vacuum chamber ($10^{-5}\,\mathrm{Torr}$). Utilizing a 100\,W continuous-wave fiber laser ($\lambda_0=1064\,\mathrm{nm}$) focused to a 4.13\,mm spot diameter, the coupon achieves an elevated surface temperature of $923\,\mathrm{K}$ ($650\,^\circ\mathrm{C}$). This enables direct spectrophotometric confirmation of the 99.78\% reflectance stopband, empirical measurement of dual-sided emissivity ($\varepsilon \approx 0.95$), and validation that absorption remains bounded below 10\,ppm under high flux without material degradation.
 
 \section{Conclusion}
 \label{sec:conclusion}
 This paper presents a comprehensive 3D multi-physics investigation and validation suite for Project Setu, a 4.0\,m relativistic lightsail propelled by a 100\,GW ground laser array. The key findings are summarized as follows:
 
 \begin{enumerate}
-\setlength{\itemsep}{0pt plus 0.2pt}
+\setlength{\itemsep}{-2.0pt plus 0.2pt}
 \setlength{\parskip}{0pt}
 \item 3D Maxwell FDTD wave optics simulations on Ansys Lumerical confirm a 72.2\,nm reflectance stopband centered at $\lambda_0=1064\,\mathrm{nm}$ with peak reflectance $R=99.7821\%$ and absorption below 10\,ppm, with dynamic blue-chirping effectively mitigating $+22.5\%$ Doppler redshift.
 \item Dual-sided Stefan-Boltzmann thermal radiation stabilizes steady-state core temperature at 923.02\,K ($0.44\%$ agreement with analytical theory), preserving a $+1,247$\,K safety margin below the sublimation limit of silicon nitride.
 \item 3D non-linear structural FEA on ANSYS Mechanical APDL (SHELL181) proves peak membrane stress is bounded at 530.88\,MPa (safety factor of $3.77\times$), while prestressed modal analysis confirms a fundamental drumhead frequency of $f_1=7.92$\,Hz ($7.92\times$ safety buffer above ground adaptive optics jitter).
-
-\newpage
-
 \item A four-level grid convergence study confirms numerical independence with an ASME GCI of $0.13\%$, and momentum transfer models match flight telemetry from JAXA IKAROS ($0.12\%$ error) and NASA LightSail 2 ($2.13\%$ error), verifying momentum conservation across solar and beamed propulsion regimes.
-\item Relativistic kinematics indicate that a 2.0\,g probe reaches $0.166c$ in 180 seconds and the $0.20c$ mission target in 227 seconds, compressing Mars transit to 1.0 hour and Alpha Centauri cruise to 21.2 years. While the macroscopic 13.49\,$\mu\mathrm{m}$ structural prototype establishes mechanical and thermal survivability under 100\,GW flux, bridging to the ultra-low areal mass flight envelope provides a quantitative roadmap for next-generation nanoresonator metasurfaces.
+\item Relativistic kinematics indicate that a 2.0\,g probe reaches $0.166c$ in 180\,s and the $0.20c$ mission target in 227\,s, compressing Mars transit to 1.0 hour and Alpha Centauri cruise to 21.2 years. The scaled 13.49\,$\mu\mathrm{m}$ prototype proves structural-thermal survivability under 100\,GW flux, establishing a quantitative foundation for ultra-low mass metasurfaces.
 \end{enumerate}
 
-Future research will focus on high-vacuum tabletop coupon testing using a 100\,W fiber laser to experimentally measure dielectric reflectivity and thermal emissivity up to 950\,K under simulated spaceflight conditions. Additional work will investigate non-uniform beam profile effects (such as Gaussian and super-Gaussian irradiance), active thermal radiation management during Doppler blue-chirp transitions, and autonomous electro-optic shape sensing for active beam-riding stabilization during multi-gigawatt acceleration phases.
+Future research will focus on tabletop coupon testing using a 100\,W fiber laser to measure reflectivity and emissivity up to 950\,K, modeling non-uniform Gaussian beam profiles, and autonomous electro-optic shape sensing for beam-riding.
 
-\vspace{-2pt}
-\newpage
-
+\vspace{-4pt}
 \section*{Declaration of Competing Interests}
 \vspace{-2pt}
 The author declares that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
-\vspace{-2pt}
+\vspace{-4pt}
 \section*{Data and Code Availability}
 \vspace{-2pt}
 All custom Python 3.11 numerical solvers, ANSYS Mechanical APDL scripts, and Ansys Lumerical 3D FDTD model files supporting this study are openly and permanently archived on Figshare at \href{https://doi.org/10.6084/m9.figshare.33476263}{doi:10.6084/m9.figshare.33476263}.
 
 \begingroup
 \sloppy
+\fontsize{6.6pt}{7.6pt}\selectfont
 \begin{thebibliography}{30}
-\setlength{\itemsep}{-2.5pt plus 0.2pt}
+\setlength{\itemsep}{-3.4pt plus 0.2pt}
 \setlength{\parskip}{0pt}
 
 \bibitem{ref1} R.~L.~Forward, \textit{Roundtrip interstellar travel using laser-pushed lightsails}, J. Spacecr. Rockets \textbf{21}, 187 (1984), \href{https://doi.org/10.2514/3.8632}{doi:\allowbreak 10.2514/\allowbreak 3.8632}.
