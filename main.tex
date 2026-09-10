@@ -315,22 +315,7 @@ Fig.~\ref{fig:fig8} illustrates the analytical Stefan-Boltzmann radiative therma
 
 At the nominal 100.0\,GW baseline with dual-sided thermal emissivity $\varepsilon=0.95$, the analytical equilibrium core temperature stabilizes at $T_{\mathrm{eq}}=927.05\,\mathrm{K}$ ($653.90\,^\circ\mathrm{C}$). This operational steady-state preserves a massive $+1,247\,\mathrm{K}$ thermal safety buffer below the stoichiometric silicon nitride sublimation breakdown threshold ($T_{\mathrm{sub}}=2,170.0\,\mathrm{K}$ / $1,896.9\,^\circ\mathrm{C}$, where $T_{\mathrm{sub}}-T_{\mathrm{FEA}}=2,170.0\,\mathrm{K}-923.02\,\mathrm{K}=+1,246.98\,\mathrm{K}\approx +1,247\,\mathrm{K}$). Having such a wide operating clearance protects the membrane against thermal runaway, vaporization, or structural softening during high-flux exposure.
 
-\begin{table}[t]
-\caption{Optical Absorptance Sensitivity and Thermal Stability Thresholds under $100\,\mathrm{GW}$ Irradiance ($T_{\mathrm{sub}}=2,170\,\mathrm{K}$).}
-\label{tab:thermal_sensitivity}
-\begin{ruledtabular}
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{lccc}
-Absorptance $\mathcal{A}$ & $P_{\mathrm{abs}}$ & $T_{\mathrm{eq}}$ & Margin to $T_{\mathrm{sub}}$ \\
-\colrule
-$10\,\mathrm{ppm}$ (Nominal) & $1.00\,\mathrm{MW}$ & $927.1\,\mathrm{K}$ & $+1,243\,\mathrm{K}$ [Safe] \\
-$50\,\mathrm{ppm}$ & $5.00\,\mathrm{MW}$ & $1,386.3\,\mathrm{K}$ & $+784\,\mathrm{K}$ [Safe] \\
-$100\,\mathrm{ppm}$ & $10.0\,\mathrm{MW}$ & $1,648.6\,\mathrm{K}$ & $+521\,\mathrm{K}$ [Safe] \\
-$200\,\mathrm{ppm}$ & $20.0\,\mathrm{MW}$ & $1,960.5\,\mathrm{K}$ & $+210\,\mathrm{K}$ [Marginal] \\
-$500\,\mathrm{ppm}$ & $50.0\,\mathrm{MW}$ & $2,465.1\,\mathrm{K}$ & Runaway ($>T_{\mathrm{sub}}$) \\
-\end{tabular}
-\end{ruledtabular}
-\end{table}
+
 
 Sensitivity analysis across realistic fabrication defect densities (Table~\ref{tab:thermal_sensitivity}) confirms that the lightsail preserves positive thermal operating margins up to an absorptance threshold of approximately $\mathcal{A} \approx 200\,\mathrm{ppm}$. Exceeding $300\,\mathrm{ppm}$ under $100\,\mathrm{GW}$ irradiance drives core temperatures past the $2,170\,\mathrm{K}$ stoichiometric $\mathrm{Si}_3\mathrm{N}_4$ sublimation limit, underscoring the necessity of strict sub-wavelength defect control during metasurface deposition.
 
@@ -384,12 +369,29 @@ To reconcile these physical regimes, our finite element framework treats the mac
 
 Second, while conventional quarter-wave dielectric stacks physically require micron-scale thickness to achieve constructive interference at 1064\,nm (producing an areal mass of $\sim 39\,\mathrm{g/m}^2$), achieving the sub-gram relativistic flight envelope will require single-layer high-contrast gratings (HCG) or 2D nanoresonators. For ultra-thin membranes approaching this lower areal mass regime where frequency scales as $f \propto t^{-0.5}$, the simulated 7.92\,Hz fundamental frequency for the 10\,$\mu\mathrm{m}$ scaled prototype analytically shifts to approximately 245\,Hz for an equivalent 13.5\,nm flight membrane. Under sustained photon thrust, radiation stress-stiffening continues to dominate out-of-plane rigidity, elevating drumhead natural frequencies well above ground-based adaptive optics pointing jitter (1.0\,Hz) and completely decoupling the macroscopic sail from beam-steering flutter.
 
+\begin{table}[!b]
+\caption{Optical Absorptance Sensitivity and Thermal Stability Thresholds under $100\,\mathrm{GW}$ Irradiance ($T_{\mathrm{sub}}=2,170\,\mathrm{K}$).}
+\label{tab:thermal_sensitivity}
+\begin{ruledtabular}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lccc}
+Absorptance $\mathcal{A}$ & $P_{\mathrm{abs}}$ & $T_{\mathrm{eq}}$ & Margin to $T_{\mathrm{sub}}$ \\
+\colrule
+$10\,\mathrm{ppm}$ (Nominal) & $1.00\,\mathrm{MW}$ & $927.1\,\mathrm{K}$ & $+1,243\,\mathrm{K}$ [Safe] \\
+$50\,\mathrm{ppm}$ & $5.00\,\mathrm{MW}$ & $1,386.3\,\mathrm{K}$ & $+784\,\mathrm{K}$ [Safe] \\
+$100\,\mathrm{ppm}$ & $10.0\,\mathrm{MW}$ & $1,648.6\,\mathrm{K}$ & $+521\,\mathrm{K}$ [Safe] \\
+$200\,\mathrm{ppm}$ & $20.0\,\mathrm{MW}$ & $1,960.5\,\mathrm{K}$ & $+210\,\mathrm{K}$ [Marginal] \\
+$500\,\mathrm{ppm}$ & $50.0\,\mathrm{MW}$ & $2,465.1\,\mathrm{K}$ & Runaway ($>T_{\mathrm{sub}}$) \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
 \subsection{Spaceflight Telemetry Cross-Validation}
 Fig.~\ref{fig:fig12} presents empirical cross-validation of Project Setu's photon radiation thrust formulation against flight telemetry from JAXA's IKAROS and NASA's LightSail 2 missions. Table~\ref{tab:table4} compiles the master multi-physics validation matrix.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.82\textwidth,keepaspectratio]{Figure_12_Telemetry_Cross_Validation.pdf}
+\includegraphics[width=0.85\textwidth,keepaspectratio]{Figure_12_Telemetry_Cross_Validation.pdf}
 \caption{Empirical cross-validation of radiation pressure propulsion against in-flight telemetry from JAXA IKAROS and NASA LightSail 2 missions.}
 \label{fig:fig12}
 \end{figure*}
@@ -417,13 +419,12 @@ The computational thrust formulation tracks spaceflight measurements with high p
 \subsection{Tabletop Laboratory Optical and Thermal Qualification Protocol}
 To experimentally qualify the metasurface prior to full-scale deployment, a tabletop high-vacuum protocol is established using a 1\,$\mathrm{cm}^2$ coupon in a vacuum chamber ($10^{-5}\,\mathrm{Torr}$). Utilizing a 100\,W continuous-wave fiber laser ($\lambda_0=1064\,\mathrm{nm}$) focused to a 4.13\,mm spot diameter, the coupon achieves an elevated surface temperature of $923\,\mathrm{K}$ ($650\,^\circ\mathrm{C}$). This enables direct spectrophotometric confirmation of the 99.78\% reflectance stopband, empirical measurement of dual-sided emissivity ($\varepsilon \approx 0.95$), and validation that absorption remains bounded below 10\,ppm under high flux without material degradation.
 
-\newpage
 \section{Conclusion}
 \label{sec:conclusion}
 This paper presents a comprehensive 3D multi-physics investigation and validation suite for Project Setu, a 4.0\,m relativistic lightsail propelled by a 100\,GW ground laser array. The key findings are summarized as follows:
 
 \begin{enumerate}
-\setlength{\itemsep}{-2.0pt plus 0.2pt}
+\setlength{\itemsep}{-2.5pt plus 0.2pt}
 \setlength{\parskip}{0pt}
 \item 3D Maxwell FDTD wave optics simulations on Ansys Lumerical confirm a 72.2\,nm reflectance stopband centered at $\lambda_0=1064\,\mathrm{nm}$ with peak reflectance $R=99.7821\%$ and absorption below 10\,ppm, with dynamic blue-chirping effectively mitigating $+22.5\%$ Doppler redshift.
 \item Dual-sided Stefan-Boltzmann thermal radiation stabilizes steady-state core temperature at 923.02\,K ($0.44\%$ agreement with analytical theory), preserving a $+1,247$\,K safety margin below the sublimation limit of silicon nitride.
@@ -448,7 +449,8 @@ All custom Python 3.11 numerical solvers, ANSYS Mechanical APDL scripts, and Ans
 \sloppy
 \fontsize{9.0pt}{11.4pt}\selectfont
 \begin{thebibliography}{30}
-\setlength{\itemsep}{3.5pt plus 0.5pt}
+\fontsize{7.5pt}{8.8pt}\selectfont
+\setlength{\itemsep}{-2.5pt plus 0.2pt}
 \setlength{\parskip}{0pt}
 
 \bibitem{ref1} R.~L.~Forward, \textit{Roundtrip interstellar travel using laser-pushed lightsails}, J. Spacecr. Rockets \textbf{21}, 187 (1984), \href{https://doi.org/10.2514/3.8632}{doi:\allowbreak 10.2514/\allowbreak 3.8632}.
